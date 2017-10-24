@@ -51,6 +51,7 @@
   (cube-iter 1.0))
 
 
+;; Using let to create local variables
 
 ;;; SICP Chapter 1 - Exercises
 ;
@@ -83,3 +84,16 @@
 ;      (t (+ (* b b) (* a a)))))
 ;
 ;* 1.4
+
+
+(define (fast-expr b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expr b (/ n 2))))
+        (else (* b (fast-expr b (- n 1))))))
+
+(define (my-gcd a b)
+  (if (= b 0)
+      a
+      (my-gcd b (remainder a b))))
+
+

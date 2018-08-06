@@ -1,9 +1,15 @@
+#lang sicp
+
 ;; definition of a common procedure
 (define (square x) (* x x))
 
 ;; sum of squares
 (define (sum-of-squares x y)
   (+ (square x) (square y)))
+
+; percolate values upward -> tree accumulation
+
+(define (sum-of-squares2 a b) (+ (* a a) (* b b)))
 
 (define (cube x) (* x x x))
 
@@ -12,6 +18,12 @@
 
 ;; `Fully reduce then expand' : Normal order
 ;; `Evaluate the args then apply' : Applicative-order evaluation
+;; applicative-order evaluation <-> lazy evaluation, vs normal-order evaluation
+
+(define (my-abs x)
+  (cond ((> x 0) x)
+         ((< x 0) (- x))
+         ((= x 0) 0)))
 
 ;; Recursive Newton's Method for square root
 (define epsilon 0.00000001)
@@ -104,5 +116,37 @@
         (else
          (remainder (* base (expmod base (- exp 1) m))
                     m))))
+
+;; ----------------
+
+;; recursive process: characterised by a chain of deferred operations (needs a stack)
+;; iterative process: fixed number of *state* variables (just needs registers)
+;; implementations with tail-recursions can evaluate recursive functions iteratively
+
+;; Orders of growth
+
+; ((lambda (x) (+ x 4)) 2)
+
+(define (f x y)
+  (let ((a (+ x 2))
+        (b (- y 2)))
+    (display b)
+    (newline)
+    (display a)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
